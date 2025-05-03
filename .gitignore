@@ -1,0 +1,21 @@
+# ── Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# ── Environments ──────────────────────────
+.venv/
+.env            # real secrets (keep .env.example)
+
+# ── Editors / OS ──────────────────────────
+*.swp
+.DS_Store
+.idea/
+.vscode/
+
+# ── Build / Docker ────────────────────────
+dist/
+build/
+*.egg-info/
+docker/*.tar
