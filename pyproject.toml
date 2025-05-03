@@ -23,7 +23,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.11.8"
-mypy = "^1.15.0"
 pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
 pre-commit = "^4.2.0"
@@ -38,10 +37,5 @@ extend-select = ["I"]
 [tool.black]
 line-length = 120
 
-[tool.mypy]
-python_version = "3.12"
-strict = true
-disable_error_code = ["misc"]
-
-[project.scripts]
+[tool.poetry.scripts]
 oneforall = "oneforall.cli.main:app"

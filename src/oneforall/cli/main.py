@@ -1,9 +1,18 @@
+import json
+
 import typer
 
-app = typer.Typer()
+from oneforall.agents.planner import PlannerAgent
+
+app = typer.Typer(add_completion=False, help="OneForAll CLI")
 
 
-@app.command()
-def demo(topic: str) -> None:  # noqa: D401
-    """Print a placeholder message."""
-    print(f"OneForAll demo: received topic='{topic}'")
+@app.command("plan", help="Return a JSON research plan for TOPIC.")
+def plan_cmd(topic: str) -> None:
+    """Generate a planner-agent outline for the given topic."""
+    result = PlannerAgent().run(topic)
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__":
+    app()
