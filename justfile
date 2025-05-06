@@ -22,6 +22,9 @@ search topic:
 summarize topic:
 	poetry run oneforall summarize "{{topic}}"
 
+draft topic:
+	poetry run oneforall draft "{{topic}}"
+
 run topic:
 	just search "{{topic}}"
 
