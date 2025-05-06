@@ -1,21 +1,22 @@
-[project]
+[tool.poetry]
 name = "oneforall"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Spykra", email = "spyridonkrantas@gmail.com"}
-]
+authors = ["Spykra <spyridonkrantas@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
-dependencies = [
-    "crewai (>=0.118.0,<0.119.0)",
-    "autogen (>=0.9,<0.10)",
-    "duckduckgo-search (>=8.0.1,<9.0.0)",
-    "langchain (>=0.3.25,<0.4.0)",
-    "chromadb (>=1.0.7,<2.0.0)",
-    "python-dotenv (>=1.1.0,<2.0.0)",
-    "typer (>=0.15.3,<0.16.0)"
+packages = [
+    { include = "oneforall", from = "src" }
 ]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+crewai = ">=0.118.0,<0.119.0"
+autogen = ">=0.9,<0.10"
+duckduckgo-search = ">=8.0.1,<9.0.0"
+langchain = ">=0.3.25,<0.4.0"
+chromadb = ">=1.0.7,<2.0.0"
+python-dotenv = ">=1.1.0,<2.0.0"
+typer = ">=0.15.3,<0.16.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

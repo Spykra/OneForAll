@@ -19,3 +19,7 @@ dist/
 build/
 *.egg-info/
 docker/*.tar
+
+# ── Binaries ──────────────────────────────
+bin/
+*.bin

@@ -2,6 +2,9 @@ import os
 from typing import Any, Dict, List
 
 import httpx
+from dotenv import load_dotenv
+
+load_dotenv()
 
 OLLAMA_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 MODEL = os.getenv("OLLAMA_MODEL", "llama3")

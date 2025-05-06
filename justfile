@@ -13,11 +13,21 @@ format:
 test:
 	poetry run pytest -q
 
+plan topic:
+	poetry run oneforall plan "{{topic}}"
+
+search topic:
+	poetry run oneforall search "{{topic}}"
+
 run topic:
-	poetry run oneforall "{{topic}}"
+	just search "{{topic}}"
+
+pipeline topic:
+	poetry run oneforall plan "{{topic}}" | tee plan.json
+	poetry run oneforall search "{{topic}}" > hits.json
 
 up:
-	docker compose -f docker/docker-compose.yml up -d
+	docker compose -f docker/docker-compose.yml up --build -d
 
 down:
 	docker compose -f docker/docker-compose.yml down
