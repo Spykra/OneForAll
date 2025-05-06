@@ -19,6 +19,9 @@ plan topic:
 search topic:
 	poetry run oneforall search "{{topic}}"
 
+summarize topic:
+	poetry run oneforall summarize "{{topic}}"
+
 run topic:
 	just search "{{topic}}"
 
