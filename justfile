@@ -25,6 +25,9 @@ summarize topic:
 draft topic:
 	poetry run oneforall draft "{{topic}}"
 
+references topic:
+	poetry run oneforall references "{{topic}}"
+
 run topic:
 	just search "{{topic}}"
 
@@ -32,8 +35,11 @@ pipeline topic:
 	poetry run oneforall plan "{{topic}}" | tee plan.json
 	poetry run oneforall search "{{topic}}" > hits.json
 
-up:
+build-up:
 	docker compose -f docker/docker-compose.yml up --build -d
+
+up:
+	docker compose -f docker/docker-compose.yml up -d
 
 down:
 	docker compose -f docker/docker-compose.yml down

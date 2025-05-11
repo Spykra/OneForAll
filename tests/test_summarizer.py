@@ -5,8 +5,6 @@ from oneforall.agents.summarizer import SummarizerAgent
 
 
 def test_summarizer_offline(monkeypatch, tmp_path: Path) -> None:
-    """Stub httpx & chat so the test stays offline."""
-    # isolate Chroma
     monkeypatch.setenv("CHROMA_PATH", str(tmp_path))
     import oneforall.db.vector_store as vs
 
@@ -15,11 +13,10 @@ def test_summarizer_offline(monkeypatch, tmp_path: Path) -> None:
     hits = [{"title": "x", "href": "https://example.com", "body": "demo"}]
 
     class FakeResp:
-        text = "<html><body><p>Hello world article.</p></body></html>"
+        text = "<p>Hello world article.</p>"
 
         @staticmethod
-        def raise_for_status() -> None:
-            return None
+        def raise_for_status() -> None: ...
 
     monkeypatch.setattr("httpx.get", lambda *_a, **_kw: FakeResp())
     monkeypatch.setattr(
@@ -28,4 +25,4 @@ def test_summarizer_offline(monkeypatch, tmp_path: Path) -> None:
     )
 
     out = SummarizerAgent().run(hits)
-    assert out[0]["summary"].startswith("- bullet")
+    assert out[0]["summary"].startswith("- bullet A")

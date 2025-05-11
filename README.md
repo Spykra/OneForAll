@@ -1,8 +1,8 @@
 ONEFORALL -- LOCAL MULTI-AGENT RESEARCH CREW
 ===========================================
 
-A tiny stack of cooperating "agents" that takes a research topic and\
-turns it into a Markdown report, completely on your own machine\
+A tiny stack of cooperating "agents" that takes a research topic and
+turns it into a Markdown report, completely on your own machine
 (no cloud calls once pages are cached).
 
 * * * * *
@@ -37,10 +37,10 @@ AGENTS (PIPELINE ORDER)
 COMMAND-LINE (all via the Typer CLI `oneforall ...`)
 --------------------------------------------------
 
-plan TOPIC -> JSON (keywords + outline)
-search TOPIC -> JSON (raw search hits)
-summarize TOPIC -> JSON (hits + "summary" field)
-draft TOPIC -> Markdown (full report, critic feedback)
+- plan TOPIC -> JSON (keywords + outline)
+- search TOPIC -> JSON (raw search hits)
+- summarize TOPIC -> JSON (hits + "summary" field)
+- draft TOPIC -> Markdown (full report, critic feedback)
 
 Every stage writes to the same Chroma cache (.chroma), so
 re-running a command is instant and fully offline once the data
@@ -51,19 +51,19 @@ is cached.
 QUICK START (HOST)
 ------------------
 
-poetry install
-ollama pull llama3 # once
-just summarize "Edge LLMs 2025" # planner → searcher → summarizer
-just draft "Edge LLMs 2025" # full report
+- poetry install
+- ollama pull llama3 # once
+- just summarize "Edge LLMs 2025" # planner → searcher → summarizer
+- just draft "Edge LLMs 2025" # full report
 
 * * * * *
 
 RUN INSIDE DOCKER
 -----------------
 
-just up # builds and starts
-docker compose exec oneforall oneforall draft "Topic"
-just down # stop stack
+- just up # builds and starts
+- docker compose exec oneforall oneforall draft "Topic"
+- just down # stop stack
 
 The container starts with `sleep infinity`, so it stays alive
 until you `exec` into it.
@@ -73,9 +73,9 @@ until you `exec` into it.
 DEVELOPMENT TASKS
 -----------------
 
-just format -- Ruff formatter
-just lint -- Ruff linter
-just test -- All unit tests (they run offline; no Ollama / web)
+- just format -- Ruff formatter\
+- just lint -- Ruff linter\
+- just test -- All unit tests (they run offline; no Ollama / web)
 
 * * * * *
 
@@ -87,12 +87,11 @@ DEPENDENCIES (PINNED IN pyproject.toml)
 - ChromaDB 1.x (SQLite) - BeautifulSoup4 4.12
 - httpx 0.27 - Ollama (model: llama3)
 
-Environment variables (loaded from .env or docker-compose):
+* * * * *
 
-cpp
+ENVIRONMENTAL VARIABLES (loaded from .env or docker-compose):
+---------------------------------------
 
-CopyEdit
-
-`OLLAMA_BASE_URL  default http://localhost:11434
+OLLAMA_BASE_URL  default http://localhost:11434
 OLLAMA_MODEL     default llama3
 CHROMA_PATH      default .chroma`

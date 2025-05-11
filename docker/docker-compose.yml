@@ -19,9 +19,9 @@ services:
     entrypoint: ["/bin/sh", "-c", "sleep infinity"]
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
-      - CHROMA_PATH=/app/.chroma          # cache inside container
+      - CHROMA_PATH=/app/.chroma
     volumes:
-      - ../:/app                            # hot-reload while dev’ing
+      - ../:/app
     depends_on:
       ollama:
         condition: service_healthy

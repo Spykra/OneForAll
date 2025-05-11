@@ -5,11 +5,8 @@ from oneforall.agents.writer import WriterAgent
 
 
 def test_writer_and_critic(monkeypatch, tmp_path: Path) -> None:
-    # stub chat to avoid LLM
-    monkeypatch.setattr(
-        "oneforall.agents.writer.chat",
-        lambda *_, **__: "Body text.",  # returns deterministic body
-    )
+    """Writer should assemble markdown correctly and Critic should pass it."""
+    monkeypatch.setattr("oneforall.agents.writer.chat", lambda *_a, **__: "Body text.")
 
     outline = ["Intro", "Challenges"]
     summaries = [
@@ -18,7 +15,11 @@ def test_writer_and_critic(monkeypatch, tmp_path: Path) -> None:
     ]
 
     md = WriterAgent().run(outline, summaries)
-    assert "## Intro" in md and "## Challenges" in md
 
-    issues = CriticAgent().run(outline, md)
-    assert issues == []  # should pass
+    assert all(md.count(f"## {section}") == 1 for section in outline)
+
+    assert "####" not in md
+    assert "---" not in md
+    assert "====" not in md
+
+    assert CriticAgent().run(outline, md) == []
